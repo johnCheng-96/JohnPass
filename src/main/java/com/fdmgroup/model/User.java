@@ -38,6 +38,12 @@ public class User {
     this.johnPassEntries = new ArrayList<>();
   }
 
+  public User(int userId, String username, String password) {
+    this.userId = userId;
+    this.username = username;
+    this.password = password;
+  }
+
   public int getUserId() {
     return userId;
   }

@@ -13,7 +13,7 @@ public class Runner {
 
     UserDAO userDAO = new UserDAO((emf));
 
-    userDAO.registerNewUser(new User("justinchoi", "1234"));
+    userDAO.updatePassword(new User(3, "kimsiang", "12345666"));
 
   }
 

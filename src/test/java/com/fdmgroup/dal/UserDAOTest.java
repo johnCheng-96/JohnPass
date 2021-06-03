@@ -4,6 +4,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.fdmgroup.model.User;
+import java.lang.reflect.Method;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -33,8 +34,14 @@ public class UserDAOTest {
   @Mock
   User mockUser;
 
+  @Mock
+  String username;
+
   @Test
-  public void test_if_registerNewUser_persistsToDb() {
+  public void test_if_registerNewUser_persistsToDb() throws NoSuchMethodException {
+
+    Method checkIfUsernameExist = UserDAO.class.getDeclaredMethod("checkIfUsernameExist");
+    checkIfUsernameExist.setAccessible(true);
 
     when(mockEmf.createEntityManager()).thenReturn(mockEm);
     when(mockEm.getTransaction()).thenReturn(mockEt);
