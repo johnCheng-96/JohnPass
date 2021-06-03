@@ -1,12 +1,13 @@
 package com.fdmgroup.command.impl;
 
+import com.fdmgroup.command.UsernameValidation;
 import com.fdmgroup.model.User;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
-public class UsernameValidation {
+public class UsernameValidationImpl implements UsernameValidation {
 
   public boolean checkIfUsernameExist(String username) {
 

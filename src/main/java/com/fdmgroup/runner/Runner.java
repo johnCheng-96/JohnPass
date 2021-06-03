@@ -1,5 +1,6 @@
 package com.fdmgroup.runner;
 
+import com.fdmgroup.command.impl.UsernameValidationImpl;
 import com.fdmgroup.dal.UserDAO;
 import com.fdmgroup.model.User;
 import javax.persistence.EntityManagerFactory;
@@ -11,7 +12,7 @@ public class Runner {
     EntityManagerFactory emf = Persistence.createEntityManagerFactory(
         "JohnPassUpdate");
 
-    UserDAO userDAO = new UserDAO((emf));
+    UserDAO userDAO = new UserDAO(emf, new UsernameValidationImpl());
 
     userDAO.updatePassword(new User(3, "kimsiang", "12345666"));
 
