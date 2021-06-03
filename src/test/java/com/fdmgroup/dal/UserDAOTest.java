@@ -1,0 +1,55 @@
+package com.fdmgroup.dal;
+
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import com.fdmgroup.model.User;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.mockito.junit.MockitoJUnitRunner;
+
+@RunWith(MockitoJUnitRunner.class)
+public class UserDAOTest {
+
+  @Mock
+  EntityManagerFactory mockEmf;
+
+  @Mock
+  EntityManager mockEm;
+
+  @Mock
+  EntityTransaction mockEt;
+
+  @Mock
+  UserDAO mockUserDAO;
+
+  @Mock
+  User mockUser;
+
+  @Test
+  public void test_if_registerNewUser_persistsToDb() {
+
+    when(mockEmf.createEntityManager()).thenReturn(mockEm);
+    when(mockEm.getTransaction()).thenReturn(mockEt);
+
+    UserDAO userDAO = new UserDAO(mockEmf);
+
+    userDAO.registerNewUser(mockUser);
+
+    verify(mockEmf).createEntityManager();
+    verify(mockEm).getTransaction();
+    verify(mockEt).begin();
+    verify(mockEm).persist(mockUser);
+    verify(mockEt).commit();
+    verify(mockEm).close();
+
+  }
+
+}
